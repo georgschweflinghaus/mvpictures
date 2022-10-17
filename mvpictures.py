@@ -2,8 +2,9 @@ import os
 import shutil
 import argparse
 from PIL import UnidentifiedImageError
-from DirReader import DirReader
-from ImageInfo import ImageInfo, ExifImageInfoNotFound
+from dir_reader import DirReader
+from image_info import ImageInfo, ExifImageInfoNotFound
+from utils import print_err
 
 
 def build_dst_dirpath(dst_dir: str, imginf: ImageInfo, format: str):
@@ -50,9 +51,9 @@ def main():
             imginf.read(file)
             move_file(imginf, args.dst[0], args.dst_format)
         except UnidentifiedImageError as err:
-            print(f"Warning: \"{file}\" may not be an image. It will not be moved!")
+            print_err(f"Warning: \"{file}\" may not be an image. It will not be moved!")
         except ExifImageInfoNotFound as err:
-            print(f"warning: \"{file}\" has no exif data. It will not be moved!")
+            print_err(f"warning: \"{file}\" has no exif data. It will not be moved!")
 
 
 if __name__ == "__main__":
