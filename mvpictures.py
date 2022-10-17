@@ -45,16 +45,19 @@ def main():
 
     files = DirReader().read(args.src)
     assure_dir_exists(args.dst[0])
+    print(f"{len(files)} pictures found.", end='')
+    pictures_moved = 0
     for file in files:
         try:
             imginf = ImageInfo()
             imginf.read(file)
             move_file(imginf, args.dst[0], args.dst_format)
+            pictures_moved += 1
         except UnidentifiedImageError as err:
             print_err(f"Warning: \"{file}\" may not be an image. It will not be moved!")
         except ExifImageInfoNotFound as err:
             print_err(f"warning: \"{file}\" has no exif data. It will not be moved!")
-
+    print(f" {pictures_moved} files were moved.")
 
 if __name__ == "__main__":
     main()
