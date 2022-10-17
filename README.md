@@ -18,3 +18,20 @@ sudo apt-get install python3.10-venv
 ```
 pip3 install -r requirements.txt
 ```
+
+### Run the script
+```
+python3 mvpictures.py
+```
+
+## Sorting into different date ranges
+By default the script will sort pictures into daily folders that have the name YEAR-MONTH-DAY.
+The parameter --dst_format describes the template used for the folders applied per picture. The template allows placholders for date specific name creation. The placholders are those of the python strftime() function.
+Examples are:
+
+| dst_format | Example folder name result | Comment |
+| --- | --- | --- |
+| "%W" | 28 | will sort per week and assign each folder the week number (Monday as first day of a week) |
+| "CW%W" | CW28 | will sort per week and assign each folder a prefix CW and the week number |
+| "%Y-%m"| 2022-10 | will sort per month|
+| "%Y-%m-%d" | 2022-10-17 |will sort per day |
